@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estimateur de beton</title>
+  <style>
+
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 480px;
+      margin: 40px auto;
+      padding: 0 20px;
+      color: #1c1a2b;
+      background: #f6f6f8;
+    }
+
+    h1 { font-size: 24px; border-bottom: 2px solid #0f2e6b; padding-bottom: 10px; }
+
+    .champ {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    label { font-size: 15px; }
+
+    input {
+      width: 130px;
+      padding: 7px 9px;
+      border: 1px solid #c3c4cc;
+      border-radius: 4px;
+      font-size: 15px;
+      text-align: right;
+    }
+
+    #resultat {
+      margin-top: 24px;
+      padding: 14px;
+      background: white;
+      border-left: 3px solid #0f186b;
+      line-height: 1.8;
+    }
+
+    #total {
+      margin-top: 12px;
+      padding: 14px;
+      background: #0f3c6b;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 4px;
+    }
+
+  </style>
+</head>
+<body>
+
+    <h1>Estimateur de beton</h1>
+
+  <div class="champ"><label for="longueur">Longueur (m)</label>
+    <input id="longueur" oninput="calculer()"></div>
+
+  <div class="champ"><label for="largeur">Largeur (m)</label>
+    <input id="largeur" oninput="calculer()"></div>
+
+  <div class="champ"><label for="epaisseur">Epaisseur (cm)</label>
+    <input id="epaisseur" oninput="calculer()"></div>
+
+  <div class="champ"><label for="dosage">Dosage (kg/m3)</label>
+    <input id="dosage" value="350" oninput="calculer()"></div>
+
+  <div class="champ"><label for="prixCiment">Prix du sac de ciment</label>
+    <input id="prixCiment" value="5500" oninput="calculer()"></div>
+
+  <div class="champ"><label for="prixSable">Prix du m3 de sable</label>
+    <input id="prixSable" value="15000" oninput="calculer()"></div>
+
+  <div class="champ"><label for="prixGravier">Prix du m3 de gravier</label>
+    <input id="prixGravier" value="20000" oninput="calculer()"></div>
+
+  <p id="resultat"></p>
+  <p id="total"></p>
+
+    <script>
+        function calculer() {
+            let longueur = Number (document.getElementById("longueur").value);
+            let largeur = Number(document.getElementById("largeur").value);
+            let epaisseur = Number(document.getElementById("epaisseur").value);
+            let dosage = Number(document.getElementById("dosage").value);
+            let prixCiment = Number(document.getElementById("prixCiment").value);
+            let prixSable = Number(document.getElementById("prixSable").value);
+            let prixGravier = Number(document.getElementById("prixGravier").value);
+            let volume = longueur * largeur * (epaisseur / 100);
+            let sacs = Math.ceil(volume * dosage / 50);
+            let sable = (volume * 0.4).toFixed(2);
+            let gravier = (volume * 0.8).toFixed(2);
+            let total = (sacs * prixCiment) + (sable * prixSable) + (gravier * prixGravier)
+            document.getElementById("resultat").innerHTML =
+                "Volume : " + volume + " m3<br>" +
+                "Ciment : " + sacs + " sacs<br>" +
+                "Sable : " + sable + " m3<br>" +
+                "Gravier : " + gravier + " m3";
+            document.getElementById("total").innerHTML = "Cout total : " + total + " FCFA";
+            }
+            calculer();
+    </script>
+</body>
+</html>
