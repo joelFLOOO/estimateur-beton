@@ -3,7 +3,7 @@
 Calcul des quantités de matériaux et du coût d'un ouvrage en béton,
 pour les chantiers de BTP à Douala.
 
-**Démo :** https://joelfloo.github.io/estimateur-beton/
+**Démo :** https://joelflooo.github.io/estimateur-beton/
 
 ## Le problème
 Le métré des matériaux se fait souvent de tête ou sur un coin de
